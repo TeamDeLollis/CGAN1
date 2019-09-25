@@ -1,7 +1,7 @@
 import time
 from glob import glob
 
-import arg
+import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
