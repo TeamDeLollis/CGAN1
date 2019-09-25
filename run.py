@@ -10,7 +10,7 @@ from keras.callbacks import TensorBoard
 from keras.layers import Conv2D, BatchNormalization, Activation, Add, Conv2DTranspose, \
     ZeroPadding2D, LeakyReLU
 from keras.optimizers import Adam
-#from keras_contrib.layers import InstanceNormalization
+from keras_contrib.layers import InstanceNormalization
 from scipy.misc import imread, imresize
 
 parser = argparse.ArgumentParser(description='')
