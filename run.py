@@ -1,7 +1,7 @@
 import time
 from glob import glob
 
-import argparse
+import args
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
@@ -10,7 +10,7 @@ from keras.callbacks import TensorBoard
 from keras.layers import Conv2D, BatchNormalization, Activation, Add, Conv2DTranspose, \
     ZeroPadding2D, LeakyReLU
 from keras.optimizers import Adam
-from keras_contrib.layers import InstanceNormalization
+#from keras_contrib.layers import InstanceNormalization
 from scipy.misc import imread, imresize
 
 parser = argparse.ArgumentParser(description='')
@@ -284,10 +284,10 @@ if __name__ == '__main__':
             gen_losses = []
 
             num_batches = int(min(imagesA.shape[0], imagesB.shape[0]) / batch_size)
-            print("Number of batches:{}".format(num_batches))
+            #print("Number of batches:{}".format(num_batches))
 
             for index in range(num_batches):
-                print("Batch:{}".format(index))
+                #print("Batch:{}".format(index))
 
                 # Sample images
                 batchA = imagesA[index * batch_size:(index + 1) * batch_size]
@@ -308,15 +308,16 @@ if __name__ == '__main__':
                 # Calculate the total discriminator loss
                 d_loss = 0.5 * np.add(0.5 * np.add(dALoss1, dALoss2), 0.5 * np.add(dBLoss1, dbLoss2))
 
-                print("d_loss:{}".format(d_loss))
+                if index % 10 == 0:
+                    print("d_loss:{}".format(d_loss))
 
                 """
                 Train the generator networks
                 """
                 g_loss = adversarial_model.train_on_batch([batchA, batchB],
                                                           [real_labels, real_labels, batchA, batchB, batchA, batchB])
-
-                print("g_loss:{}".format(g_loss))
+                if index % 10 == 0:
+                    print("g_loss:{}".format(g_loss))
 
                 dis_losses.append(d_loss)
                 gen_losses.append(g_loss)
