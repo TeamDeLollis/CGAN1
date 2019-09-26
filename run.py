@@ -298,9 +298,9 @@ if __name__ == '__main__':
 
                 # Sample images
                 if batch_size == 1:
-                    sequence = np.arange(imagesA.shape[0]) #in modo che siano presi in modo casuale
+                    sequence = np.arange(imagesA.shape[0]-1) #in modo che siano presi in modo casuale
                     np.random.shuffle(sequence)
-                    batchA = imagesA[sequence[index]:sequence[index+1]]
+                    batchA = imagesA[sequence[index]:sequence[index]+1]
                 else:
                     batchA = imagesA[index * batch_size:(index + 1) * batch_size]
                 batchB = imagesB[index * batch_size:(index + 1) * batch_size]
