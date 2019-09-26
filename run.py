@@ -116,6 +116,8 @@ def load_images(data_dir):
     imagesB = glob(data_dir + '/TrainB/*.*')
 
     min_l = len(imagesB)
+    print(len(imagesA))
+    print(len(imagesB))
     allImagesA = []
     allImagesB = []
 
