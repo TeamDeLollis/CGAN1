@@ -112,8 +112,8 @@ def build_discriminator():
 
 
 def load_images(data_dir):
-    imagesA = glob(data_dir + '/TestA/*.*')
-    imagesB = glob(data_dir + '/TestB/*.*')
+    imagesA = glob(data_dir + '/TrainA/*.*')
+    imagesB = glob(data_dir + '/TrainB/*.*')
 
     allImagesA = []
     allImagesB = []
