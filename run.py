@@ -83,7 +83,7 @@ def build_discriminator():
     """
     Create a discriminator network using the hyperparameter values defined below
     """
-    input_shape = (128, 128, 3)
+    input_shape = (256, 256, 3)
     hidden_layers = 3
 
     input_layer = Input(shape=input_shape)
