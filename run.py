@@ -211,7 +211,7 @@ def write_log(callback, name, loss, batch_no):
 
 
 if __name__ == '__main__':
-    data_dir = "datasets/vangogh2photo/"
+    data_dir = "/content/drive/My Drive/vangogh2photobig"
     batch_size = 1
     epochs = 500
     #mode = 'train'
