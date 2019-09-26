@@ -115,12 +115,13 @@ def load_images(data_dir):
     imagesA = glob(data_dir + '/TrainA/*.*')
     imagesB = glob(data_dir + '/TrainB/*.*')
 
+    min_l = len(imagesB)
     allImagesA = []
     allImagesB = []
 
     for index, filename in enumerate(imagesA):
         imgA = imread(filename, mode='RGB')
-        if imagesB[index]:
+        if index < min_l - 1:
             imgB = imread(imagesB[index], mode='RGB')
             imgB = imresize(imgB, (128, 128))
 
@@ -128,12 +129,12 @@ def load_images(data_dir):
         
         if np.random.random() > 0.5:
             imgA = np.fliplr(imgA)
-            if imagesB[index]:
+            if index < min_l - 1:
                 imgB = np.fliplr(imgB)
 
         allImagesA.append(imgA)
         
-        if imagesB[index]:
+        if index < min_l - 1:
             allImagesB.append(imgB)
 
     # Normalize images
