@@ -36,7 +36,7 @@ def build_generator():
     """
     Create a generator network using the hyperparameter values defined below
     """
-    input_shape = (128, 128, 3)
+    input_shape = (256, 256, 3)
     residual_blocks = 6
     input_layer = Input(shape=input_shape)
 
@@ -125,9 +125,9 @@ def load_images(data_dir):
         imgA = imread(filename, mode='RGB')
         if index < min_l - 1:
             imgB = imread(imagesB[index], mode='RGB')
-            imgB = imresize(imgB, (128, 128))
+            imgB = imresize(imgB, (256, 256))
 
-        imgA = imresize(imgA, (128, 128))
+        imgA = imresize(imgA, (256, 256))
         
         if np.random.random() > 0.5:
             imgA = np.fliplr(imgA)
@@ -140,8 +140,8 @@ def load_images(data_dir):
             allImagesB.append(imgB)
 
     # Normalize images
-    allImagesA = np.array(allImagesA) / 127.5 - 1.
-    allImagesB = np.array(allImagesB) / 127.5 - 1.
+    allImagesA = np.array(allImagesA) / 255.5 - 1.
+    allImagesB = np.array(allImagesB) / 255.5 - 1.
 
     return allImagesA, allImagesB
 
@@ -158,13 +158,13 @@ def load_test_batch(data_dir, batch_size):
 
     for i in range(len(imagesA)):
         # Load images and resize images
-        imgA = imresize(imread(imagesA[i], mode='RGB').astype(np.float32), (128, 128))
-        imgB = imresize(imread(imagesB[i], mode='RGB').astype(np.float32), (128, 128))
+        imgA = imresize(imread(imagesA[i], mode='RGB').astype(np.float32), (256, 256))
+        imgB = imresize(imread(imagesB[i], mode='RGB').astype(np.float32), (256, 256))
 
         allA.append(imgA)
         allB.append(imgB)
 
-    return np.array(allA) / 127.5 - 1.0, np.array(allB) / 127.5 - 1.0
+    return np.array(allA) / 255.5 - 1.0, np.array(allB) / 255.5 - 1.0
 
 
 def save_images(originalA, generatedB, recosntructedA, originalB, generatedA, reconstructedB, path):
@@ -220,7 +220,7 @@ def write_log(callback, name, loss, batch_no):
 if __name__ == '__main__':
     data_dir = "/content/drive/My Drive/vangogh2photobig"
     batch_size = 1
-    epochs = 500
+    epochs = 400
     #mode = 'train'
 
     if args.mode == 'train':
@@ -246,8 +246,8 @@ if __name__ == '__main__':
         """
         Create an adversarial network
         """
-        inputA = Input(shape=(128, 128, 3))
-        inputB = Input(shape=(128, 128, 3))
+        inputA = Input(shape=(256, 256, 3))
+        inputB = Input(shape=(256, 256, 3))
 
         # Generated images using both of the generator networks
         generatedB = generatorAToB(inputA)
