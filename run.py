@@ -120,17 +120,21 @@ def load_images(data_dir):
 
     for index, filename in enumerate(imagesA):
         imgA = imread(filename, mode='RGB')
-        imgB = imread(imagesB[index], mode='RGB')
+        if imagesB[index]:
+            imgB = imread(imagesB[index], mode='RGB')
+            imgB = imresize(imgB, (128, 128))
 
         imgA = imresize(imgA, (128, 128))
-        imgB = imresize(imgB, (128, 128))
-
+        
         if np.random.random() > 0.5:
             imgA = np.fliplr(imgA)
-            imgB = np.fliplr(imgB)
+            if imagesB[index]:
+                imgB = np.fliplr(imgB)
 
         allImagesA.append(imgA)
-        allImagesB.append(imgB)
+        
+        if imagesB[index]:
+            allImagesB.append(imgB)
 
     # Normalize images
     allImagesA = np.array(allImagesA) / 127.5 - 1.
@@ -290,7 +294,12 @@ if __name__ == '__main__':
                 #print("Batch:{}".format(index))
 
                 # Sample images
-                batchA = imagesA[index * batch_size:(index + 1) * batch_size]
+                if batch_size == 1:
+                    sequence = np.arange(imagesA.shape[0], imagesB.shape[0]) #in modo che siano presi in modo casuale
+                    np.random.shuffle(sequence)
+                    batchA = imagesA[sequence[index]:sequence[index+1]]
+                else:
+                    batchA = imagesA[index * batch_size:(index + 1) * batch_size]
                 batchB = imagesB[index * batch_size:(index + 1) * batch_size]
 
                 # Translate images to opposite domain
