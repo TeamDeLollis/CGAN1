@@ -303,6 +303,7 @@ if __name__ == '__main__':
                     batchA = imagesA[sequence[index]:sequence[index]+1]
                 else:
                     batchA = imagesA[index * batch_size:(index + 1) * batch_size]
+
                 batchB = imagesB[index * batch_size:(index + 1) * batch_size]
 
                 # Translate images to opposite domain
