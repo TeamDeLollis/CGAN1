@@ -220,7 +220,7 @@ def write_log(callback, name, loss, batch_no):
 if __name__ == '__main__':
     data_dir = "/content/drive/My Drive/vangogh2photobig"
     batch_size = 1
-    epochs = 400
+    epochs = 200
     #mode = 'train'
 
     if args.mode == 'train':
